@@ -44,13 +44,14 @@ class AuthController extends Controller
             'email' => 'required|email|unique:App\Models\User,email',
             'password' => 'required',
             'username' => 'required|string|unique:App\Models\User,username',
-            'role_id' => 'required|exists:App\Models\Role,id'
+            'role_id' => 'required|exists:App\Models\Role,id',
+            'phone' => 'string'
         ]);
 
         $credentials['password'] = Hash::make($credentials['password']);
 
         $user = User::create($credentials);
 
-        return $user;
+        return response($user, 201);
     }
 }
